@@ -1,0 +1,275 @@
+Question 1
+Duration: 30 minutes
+Fix code smells in the following codes. Assume each code compiles as it is.
+NB: Create a public repo named my-clean-code in your GitHub. Add a file named cleanCode.txt and put your answers there. Send your public repo url to wmunyebvu@zimttech.org.
+Code 1
+
+
+public class MyTest {
+
+    // Simplified calculations
+    public long computeDurationInMilliseconds(long hours, long minutes, long seconds) {
+        return hours * 3600000 + minutes * 60000 + seconds * 1000;
+    }
+
+    // Create a subclass of RuntimeException
+    public void doSomething() {
+        throw new CalculationFailedException("Calculation failed");
+    }
+
+    public static class CalculationFailedException extends RuntimeException {
+        public CalculationFailedException(String message) {
+            super(message);
+        }
+    }
+}
+
+
+Code 2
+
+public class MyClass {
+    //mark constant as a static
+    private static final int FOO = 42;
+
+    public int compute(int a) {
+        //reuse static constant
+        return a * FOO;
+    }
+}
+
+Code 3
+
+import static java.util.Objects.requireNonNull;
+
+public class StringUtils {
+    public static String concatenate(String s1, String s2) {
+        requireNonNull(s2);
+        requireNonNull(s2);
+        return s1 + s2; //Compile will convert this to StringBuilder
+    }
+}
+
+
+Code 4
+
+package my.company;
+
+//remove unused classes
+// import my.company.SomeClass;
+// import java.io.File;
+import java.lang.String;
+
+// remove duplicate class names -> import my.company2.SomeType;
+import my.company2.SomeType;
+
+public class ExampleClass {
+    public String someString;
+    public SomeType something;
+
+}
+
+Code 5
+
+public class Example2Class {
+
+    // remove throwable -> Throw
+    // It's already throwing a runtime exception
+    public void foo(String bar){
+        throw new RuntimeException("My Message");
+    }
+}
+
+Code 6
+import java.util.List;
+
+public class Foo {
+    // Inline variables
+    // Do not return collection return (List/Set/Map/Queue) as appropriate
+    public List<User> listUsers() {
+        return parse(new File("/home/mylogin/Dev/users.txt"));
+    }
+}
+
+
+Code 7
+
+public class MyFoo {
+    public static void main(String[] args) {
+        System.out.println("It works");
+    }
+}
+
+Code 8
+
+//This one I don't understand whether you need internal methods for encapsulation or not.
+//Using static methods works as is.
+public class MyFoorest {
+    public static void prepare(String string) {
+        System.out.println(string + " prepared");
+    }
+
+    public static void execute(String string) {
+        System.out.println(string + " executed");
+    }
+
+    public static void release(String string) {
+        System.out.println(string + " released");
+    }
+
+    public void run() {
+        prepare("action1");
+        execute("action1");
+        release("action1");
+    }
+}
+Code 9
+
+//make return types optional
+class ParentClass {
+    public void doSomething() {
+        System.out.println("Parent doing something");
+    }
+}
+
+class FirstChildClass extends ParentClass {
+    public void doSomething() {
+        System.out.println("First born doing something");
+    }
+}
+
+Code 10
+
+class MikeClass {
+    void doSomething() {
+        // TODO:(Allen) Add the name of the person who added the todo
+    }
+
+    void doIt() {
+        System.out.println("I am doing it");
+    }
+}
+
+
+Code 11
+//Both classes must implement Serializable for person to be serializable
+class Address implements Serializable {
+}
+
+class Person implements Serializable {
+    private static final long serialVersionUID = 1905122041950251207L;
+    private String name;
+    private Address address;
+}
+
+
+Code 12
+//Just return 12
+public class Mine {
+    int foo(int a) {
+        return 12;
+    }
+}
+
+Code 13
+//Must be static
+public class Myclass {
+    public static final int THRESHOLD = 3;
+}
+
+Code 14
+
+//Replace with method references
+class A {
+    void process(List<A> list) {
+        list.stream()
+                .filter(a -> a instanceof B)
+                .map(a -> (B) a)
+                .map(B::<String>getObject)
+                .forEach(System.out::println);
+    }
+}
+
+class B extends A {
+    <T> T getObject() {
+        return null;
+    }
+}
+
+Code 15
+//use enum instead
+enum Status {
+    OPEN(1),
+    CLOSED(2);
+    int status;
+
+    Status(int status) {
+        this.status = status;
+    }
+}
+
+Code 16
+
+//Remove params in the diamond. Diamonds were required in java 1.7 and below
+public class Baidu {
+    List<String> strings = new ArrayList<>();
+    Map<String, List<Integer>> map = new HashMap<>();
+}
+
+
+Code 17
+//Return primitive boolean
+public class MyBaidu {
+    public static void main(String[] args) {
+        boolean b = getBoolean();
+        if (b) {
+            foo();
+        } else {
+            bar();
+        }
+    }
+}
+Code 18
+// Use file exists
+public class FirstBaidu {
+    public void checkFile(File file) {
+        if (file != null) {
+            if (file.exists()) {
+                System.out.println("File is okay");
+            }
+        }
+    }
+}
+
+Code 19
+//Remove redundant toString
+public class HelloWorld {
+    public void myMethod() {
+        boolean pick = new Random().nextBoolean();
+        StringBuilder message = new StringBuilder();
+        if(pick){
+            message.append("hello world");
+        }
+        else {
+            message.append("My Cat");
+        }
+        message.append(" done");
+        System.out.println(message);
+    }
+}
+
+Code 20
+public class MyRandom{
+
+    public static void main(String[] args){
+        if (booleanMethod()) {
+            /* ... */
+        } else {
+            /* ... */
+        }
+        doSomething(booleanMethod());
+        booleanVariable = booleanMethod();
+        booleanVariable = booleanMethod() || exp;
+        booleanVariable = !booleanMethod() && exp;
+        booleanVariable = !booleanMethod() || exp;
+        booleanVariable = booleanMethod() && exp;
+    } }
