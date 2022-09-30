@@ -1,5 +1,6 @@
-package com.example.lostandfound.security;
+package com.example.lostandfound.config;
 
+import com.example.lostandfound.security.TokenHeaderFilter;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.beans.factory.annotation.Qualifier;
